@@ -1,17 +1,17 @@
 services:
-  # 1. The React Frontend
+  # 1. The React Frontend (Static Site - Free)
   - type: web
     name: lila-frontend
-    env: node
+    env: static
     plan: free
     buildCommand: cd frontend && npm install && npm run build
-    startCommand: npx serve -s frontend/dist -p $PORT
+    staticPublishPath: ./frontend/dist
     envVars:
       - key: VITE_NAKAMA_HOST
         fromService:
           type: web
           name: lila-nakama
-          env: RENDER_EXTERNAL_HOSTNAME
+          property: host
       - key: VITE_NAKAMA_PORT
         value: "443"
       - key: VITE_NAKAMA_USE_SSL
@@ -19,14 +19,13 @@ services:
       - key: VITE_NAKAMA_SERVER_KEY
         value: "defaultkey"
 
-  # 2. The Nakama Backend Server
+  # 2. The Nakama Backend Server (Docker Web Service - Free)
   - type: web
     name: lila-nakama
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /
-    startCommand: "run --database.address \"$DATABASE_URL\" --session.token_expiry_sec 7200"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -36,8 +35,7 @@ services:
         generateValue: true
 
 databases:
-  # 3. The PostgreSQL Instance
+  # 3. The PostgreSQL Instance (Free)
   - name: lila-db
     databaseName: nakama
-    user: postgres
     plan: free
