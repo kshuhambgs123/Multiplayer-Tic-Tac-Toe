@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; overflow-x: hidden; }
+#root { width: 100%; }
+
+/* ─── Mark pop-in (satisfying elastic snap) ─────────────────────────────── */
+@keyframes popIn {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  65%  { transform: scale(1.2) rotate(4deg);  opacity: 1; }
+  85%  { transform: scale(0.92) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg);    opacity: 1; }
+}
+.mark-pop { animation: popIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+/* ─── Cell ripple on tap ─────────────────────────────────────────────────── */
+@keyframes cellRipple {
+  0%   { box-shadow: inset 0 0 0 0 rgba(255,255,255,0.3); }
+  100% { box-shadow: inset 0 0 0 80px rgba(255,255,255,0); }
+}
+.cell-tap { animation: cellRipple 0.5s ease-out; }
+
+/* ─── Winner celebration ─────────────────────────────────────────────────── */
+@keyframes heroFloat {
+  0%, 100% { transform: scale(1) translateY(0);   filter: drop-shadow(0 0 16px rgba(30,188,163,0.5)); }
+  50%       { transform: scale(1.05) translateY(-6px); filter: drop-shadow(0 0 32px rgba(30,188,163,0.9)); }
+}
+.hero-float { animation: heroFloat 2s ease-in-out infinite; }
+
+/* ─── Confetti particles ─────────────────────────────────────────────────── */
+@keyframes confettiFly {
+  0%   { transform: translateY(0) rotate(0deg) scale(1);   opacity: 1; }
+  100% { transform: translateY(-140px) rotate(720deg) scale(0.2); opacity: 0; }
+}
+
+/* ─── Screen entrance ────────────────────────────────────────────────────── */
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.s0 { animation: slideUp 0.38s ease-out 0.00s both; }
+.s1 { animation: slideUp 0.38s ease-out 0.07s both; }
+.s2 { animation: slideUp 0.38s ease-out 0.14s both; }
+.s3 { animation: slideUp 0.38s ease-out 0.21s both; }
+.s4 { animation: slideUp 0.38s ease-out 0.28s both; }
+.s5 { animation: slideUp 0.38s ease-out 0.35s both; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade { animation: fadeIn 0.4s ease both; }
+
+/* ─── Pulsing active dot ─────────────────────────────────────────────────── */
+@keyframes activeDot {
+  0%, 100% { transform: scale(1);   opacity: 0.9; }
+  50%       { transform: scale(1.6); opacity: 0.4; }
+}
+.active-dot { animation: activeDot 1.2s ease-in-out infinite; }
+
+/* ─── Spinner rings ──────────────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.ring-cw  { animation: spin 1.4s linear infinite; }
+.ring-ccw { animation: spin 2.1s linear infinite reverse; }
+
+/* ─── Timer bar transition ───────────────────────────────────────────────── */
+.timer-bar { transition: width 1s linear, background 0.5s ease; }
+
+/* ─── XP bar fill ────────────────────────────────────────────────────────── */
+@keyframes xpFill {
+  from { width: 0%; }
+}
+.xp-fill { animation: xpFill 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both; }
+
+/* ─── Card hover lift ────────────────────────────────────────────────────── */
+.card-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.card-lift:hover { transform: translateY(-2px); }
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }

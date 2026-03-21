@@ -1,0 +1,34 @@
+name: nakama-tictactoe
+database:
+  address: ["postgres:localdb@postgres:5432/nakama"]
+  conn_max_lifetime_ms: 3600000
+  conn_max_idle_time_ms: 3600000
+  max_open_conns: 0
+  max_idle_conns: 100
+  logger:
+    level: "debug"
+    file: "/nakama/data/logs/nakama.log"
+    rotation: true
+
+runtime:
+  path: "/nakama/data/modules"
+  entrypoint: "index.js"
+  http_key: "defaultkey"
+
+console:
+  port: 7351
+  username: "admin"
+  password: "password"
+
+socket:
+  port: 7350
+  max_message_size_bytes: 4096
+
+match:
+  max_empty_sec: 0
+  label_update_interval_sec: 1
+
+matchmaker:
+  max_tickets: 2
+  interval_sec: 3
+  max_intervals: 2
