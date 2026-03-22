@@ -17,6 +17,6 @@ COPY infrastructure/nakama-config.yml /nakama/data/
 COPY start.sh /nakama/
 RUN chmod +x /nakama/start.sh
 
-# Override the entrypoint to run the shell script instead of defaulting to Nakama directly
-# We use sh to run the script since dumb-init is not installed in the base image
+# Expose the API port for Render to detect and map correctly
+EXPOSE 7350
 ENTRYPOINT ["/bin/sh", "/nakama/start.sh"]
