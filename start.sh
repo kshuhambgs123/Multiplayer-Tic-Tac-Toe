@@ -1,9 +1,9 @@
 #!/bin/sh
-# Diagnostic: Log which variables are available (values are truncated/masked for security)
+# Diagnostic: Log which variables are available (POSIX compliant)
 echo "Checking Render DB variables..."
-echo "DB_HOST: ${DB_HOST:0:8}..."
-echo "DB_USER: ${DB_USER:0:4}..."
-echo "DB_NAME: ${DB_NAME}"
+echo "DB_HOST is set: ${DB_HOST:+yes}"
+echo "DB_USER is set: ${DB_USER:+yes}"
+echo "DB_NAME is set: ${DB_NAME:+yes}"
 
 # Construct Nakama database connection URL from individual Render env vars
 if [ -z "$DB_HOST" ]; then
