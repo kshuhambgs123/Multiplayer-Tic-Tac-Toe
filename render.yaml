@@ -2,9 +2,10 @@ services:
   # 1. The React Frontend (Static Site - Free)
   - type: web
     name: lila-frontend
-    env: static
+    env: node
+    plan: free
     buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    startCommand: npx serve -s frontend/dist -p $PORT
     envVars:
       - key: VITE_NAKAMA_HOST
         fromService:
