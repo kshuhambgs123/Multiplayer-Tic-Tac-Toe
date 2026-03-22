@@ -2,7 +2,12 @@ import { Client } from "@heroiclabs/nakama-js";
 import type { Session, Socket } from "@heroiclabs/nakama-js";
 import { v4 as uuidv4 } from "uuid";
 
-const client = new Client("defaultkey", "127.0.0.1", "7350", false);
+const host = import.meta.env.VITE_NAKAMA_HOST || "127.0.0.1";
+const port = import.meta.env.VITE_NAKAMA_PORT || "7350";
+const useSsl = import.meta.env.VITE_NAKAMA_USE_SSL === "true";
+const serverKey = import.meta.env.VITE_NAKAMA_SERVER_KEY || "defaultkey";
+
+const client = new Client(serverKey, host, port, useSsl);
 
 export const getNakamaClient = () => client;
 

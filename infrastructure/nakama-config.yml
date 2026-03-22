@@ -7,8 +7,6 @@ database:
   max_idle_conns: 100
   logger:
     level: "debug"
-    file: "/nakama/data/logs/nakama.log"
-    rotation: true
 
 runtime:
   path: "/nakama/data/modules"

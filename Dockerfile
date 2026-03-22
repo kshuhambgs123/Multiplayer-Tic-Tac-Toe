@@ -18,5 +18,5 @@ COPY start.sh /nakama/
 RUN chmod +x /nakama/start.sh
 
 # Override the entrypoint to run the shell script instead of defaulting to Nakama directly
-# dumb-init is still recommended
-ENTRYPOINT ["dumb-init", "--", "/nakama/start.sh"]
+# We use sh to run the script since dumb-init is not installed in the base image
+ENTRYPOINT ["/bin/sh", "/nakama/start.sh"]
