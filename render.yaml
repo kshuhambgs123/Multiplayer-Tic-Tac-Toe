@@ -26,9 +26,6 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /
-    startCommand: >
-      /nakama/nakama migrate up --database.address "postgres://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME" &&
-      /nakama/nakama run --config /nakama/data/nakama-config.yml --database.address "postgres://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME" --session.token_expiry_sec 7200
     envVars:
       - key: PORT
         value: "7350"
@@ -52,6 +49,10 @@ services:
         fromDatabase:
           name: lila-db
           property: port
+      - key: NAKAMA_DATABASE_URL
+        fromDatabase:
+          name: lila-db
+          property: connectionString
       - key: NAKAMA_CONSOLE_PASSWORD
         generateValue: true
 
