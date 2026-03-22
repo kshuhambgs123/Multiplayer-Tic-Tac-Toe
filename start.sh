@@ -1,7 +1,6 @@
 #!/bin/sh
-# Start Nakama and dynamically pass the DATABASE_URL provided by Render
-# Fix potential postgresql:// vs postgres:// protocol issue
-ADAPTER_URL=$(echo "$NAKAMA_DATABASE_URL" | sed 's/^postgresql/postgres/')
+# Construct Nakama database connection URL from individual Render env vars
+ADAPTER_URL="postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 
 echo "Running Nakama migrations..."
 /nakama/nakama migrate up --database.address "$ADAPTER_URL"
