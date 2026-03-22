@@ -8,10 +8,7 @@ services:
     startCommand: npx serve -s frontend/dist -p $PORT
     envVars:
       - key: VITE_NAKAMA_HOST
-        fromService:
-          type: web
-          name: lila-nakama
-          property: host
+        value: lila-nakama.onrender.com
       - key: VITE_NAKAMA_PORT
         value: "443"
       - key: VITE_NAKAMA_USE_SSL
