@@ -1,10 +1,13 @@
 #!/bin/sh
-# Robust DSN resolution
+# Robust DSN resolution with Export
 if [ -n "$NAKAMA_DATABASE_URL" ]; then
   ADAPTER_URL=$(echo "$NAKAMA_DATABASE_URL" | sed 's/^postgresql/postgres/')
 else
   ADAPTER_URL="postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 fi
+
+export NAKAMA_DATABASE_ADDRESS="$ADAPTER_URL"
+export NAKAMA_DATABASE_DRIVER="postgres"
 
 echo "DEBUG: Constructed ADAPTER_URL (masked): $(echo $ADAPTER_URL | sed 's/:[^@]*@/:****@/')"
 
