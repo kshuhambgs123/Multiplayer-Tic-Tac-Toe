@@ -1,7 +1,7 @@
 services:
   # 1. The React Frontend (Static Site - Free)
   - type: web
-    name: lila-frontend
+    name: lila-web-client
     env: node
     plan: free
     buildCommand: cd frontend && npm install && npm run build
