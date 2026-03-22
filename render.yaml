@@ -23,6 +23,7 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /
+    port: 7350
     envVars:
       - key: PORT
         value: "7350"
