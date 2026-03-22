@@ -1,18 +1,11 @@
 #!/bin/sh
-# Robust DSN resolution with Export
-if [ -n "$NAKAMA_DATABASE_URL" ]; then
-  ADAPTER_URL=$(echo "$NAKAMA_DATABASE_URL" | sed 's/^postgresql/postgres/')
-else
-  ADAPTER_URL="postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
+# Fix protocol if it exists (Render uses postgresql://, Nakama needs postgres://)
+if [ -n "$NAKAMA_DATABASE_ADDRESS" ]; then
+  export NAKAMA_DATABASE_ADDRESS=$(echo "$NAKAMA_DATABASE_ADDRESS" | sed 's/^postgresql/postgres/')
 fi
 
-export NAKAMA_DATABASE_ADDRESS="$ADAPTER_URL"
-export NAKAMA_DATABASE_DRIVER="postgres"
-
-echo "DEBUG: Constructed ADAPTER_URL (masked): $(echo $ADAPTER_URL | sed 's/:[^@]*@/:****@/')"
-
 echo "Running migrations..."
-/nakama/nakama migrate up --database.address "$ADAPTER_URL"
+/nakama/nakama migrate up
 
 echo "Starting server..."
-exec /nakama/nakama run --config /nakama/data/nakama-config.yml --database.address "$ADAPTER_URL" --session.token_expiry_sec 7200
+exec /nakama/nakama run --config /nakama/data/nakama-config.yml --session.token_expiry_sec 7200
