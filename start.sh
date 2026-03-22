@@ -1,6 +1,11 @@
 #!/bin/sh
-# Minimal start script to avoid shell parsing issues
+# Use environment variables for better reliability
 ADAPTER_URL="postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 
-/nakama/nakama migrate up --database.address "$ADAPTER_URL"
-exec /nakama/nakama run --config /nakama/data/nakama-config.yml --database.address "$ADAPTER_URL" --session.token_expiry_sec 7200
+export NAKAMA_DATABASE_ADDRESS="$ADAPTER_URL"
+
+echo "Running migrations..."
+/nakama/nakama migrate up
+
+echo "Starting server..."
+exec /nakama/nakama run --config /nakama/data/nakama-config.yml --session.token_expiry_sec 7200
