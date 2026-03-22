@@ -29,10 +29,10 @@ services:
     envVars:
       - key: PORT
         value: "7350"
-      - key: DATABASE_URL
+      - key: NAKAMA_DATABASE_URL
         fromDatabase:
           name: lila-db
-          property: connectionString
+          property: internalConnectionString
       - key: NAKAMA_CONSOLE_PASSWORD
         generateValue: true
 

@@ -1,6 +1,5 @@
 name: nakama-tictactoe
 database:
-  address: ["postgres:localdb@postgres:5432/nakama"]
   conn_max_lifetime_ms: 3600000
   conn_max_idle_time_ms: 3600000
   max_open_conns: 0
