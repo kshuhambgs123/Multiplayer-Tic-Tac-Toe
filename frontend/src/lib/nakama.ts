@@ -24,7 +24,7 @@ export const authenticate = async (username?: string): Promise<Session> => {
 };
 
 export const createSocket = async (session: Session): Promise<Socket> => {
-  const socket = client.createSocket(false, false);
+  const socket = client.createSocket(useSsl, false);
   await socket.connect(session, true);
   return socket;
 };
