@@ -30,6 +30,26 @@ services:
         fromDatabase:
           name: lila-db
           property: connectionString
+      - key: DB_HOST
+        fromDatabase:
+          name: lila-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: lila-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: lila-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: lila-db
+          property: database
+      - key: DB_PORT
+        fromDatabase:
+          name: lila-db
+          property: port
       - key: NAKAMA_DATABASE_DRIVER
         value: "postgres"
       - key: NAKAMA_SOCKET_PORT
