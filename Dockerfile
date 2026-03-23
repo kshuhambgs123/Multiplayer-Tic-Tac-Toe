@@ -10,7 +10,7 @@ RUN npm run build
 FROM registry.heroiclabs.com/heroiclabs/nakama:3.16.0
 
 # Copy the custom game logic into the Nakama runtime module directory
-COPY --from=builder /backend/build/*.js /nakama/data/modules/build/
+COPY --from=builder /backend/build/*.js /nakama/data/modules/
 COPY infrastructure/nakama-config.yml /nakama/data/
 
 # Start wrapper
