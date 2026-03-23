@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const host = import.meta.env.VITE_NAKAMA_HOST || "lila-nakama.onrender.com";
 const port = import.meta.env.VITE_NAKAMA_PORT || "443";
-const useSsl = import.meta.env.VITE_NAKAMA_USE_SSL !== "false";
+const useSslText = import.meta.env.VITE_NAKAMA_USE_SSL;
+const useSsl = useSslText !== undefined ? useSslText !== "false" : true;
 const serverKey = import.meta.env.VITE_NAKAMA_SERVER_KEY || "defaultkey";
 
 const client = new Client(serverKey, host, port, useSsl);
