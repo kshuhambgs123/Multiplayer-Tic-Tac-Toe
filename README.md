@@ -2,6 +2,15 @@
 
 This repository contains a full-stack multiplayer Tic-Tac-Toe application. It uses a React frontend and a Nakama server authoritative backend for gameplay logic, matchmaking, and leaderboards.
 
+## 🚀 Play Online
+You can play the live version of the game here: **[https://lila-web-client.onrender.com/](https://lila-web-client.onrender.com/)**
+
+> **How to play online:**
+> 1. Open the URL above.
+> 2. Enter a nickname to connect.
+> 3. Click **Find Match** to enter the matchmaking queue.
+> 4. Share the link with a friend and have them join simultaneously, or simply open a new Incognito window and join the queue to play against yourself!
+
 ## Setup Instructions
 
 ### Prerequisites
