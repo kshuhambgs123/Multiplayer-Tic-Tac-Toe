@@ -41,8 +41,8 @@ else
 fi
 
 # 5. Wait for Deep Initialization
-echo "Waiting 3 seconds for deep database initialization..."
-sleep 3
+echo "Waiting 10 seconds for deep database initialization..."
+sleep 10
 
 # 6. Integrated Launch
 echo "Launching Frontend and Analytics Hub..."
