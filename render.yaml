@@ -29,34 +29,26 @@ services:
         fromDatabase:
           name: lila-db
           property: connectionString
-      - key: DB_HOST
-        fromDatabase:
-          name: lila-db
-          property: host
-      - key: DB_USER
-        fromDatabase:
-          name: lila-db
-          property: user
-      - key: DB_PASS
-        fromDatabase:
-          name: lila-db
-          property: password
-      - key: DB_NAME
-        fromDatabase:
-          name: lila-db
-          property: database
-      - key: DB_PORT
-        fromDatabase:
-          name: lila-db
-          property: port
       - key: NAKAMA_DATABASE_DRIVER
         value: "postgres"
       - key: NAKAMA_SOCKET_PORT
         value: "7350"
-      - key: NAKAMA_CONSOLE_PASSWORD
-        generateValue: true
+      - key: NAKAMA_RUNTIME_PATH
+        value: "/nakama/data/modules"
       - key: NAKAMA_RUNTIME_HTTP_KEY
         value: "defaultkey"
+      - key: NAKAMA_CONSOLE_PORT
+        value: "7351"
+      - key: NAKAMA_CONSOLE_USERNAME
+        value: "admin"
+      - key: NAKAMA_CONSOLE_PASSWORD
+        generateValue: true
+      - key: NAKAMA_MATCH_MAX_EMPTY_SEC
+        value: "0"
+      - key: NAKAMA_MATCHMAKER_MAX_TICKETS
+        value: "2"
+      - key: NAKAMA_SESSION_TOKEN_EXPIRY_SEC
+        value: "7200"
 
 databases:
   # 3. The PostgreSQL Instance (Free)
