@@ -1,22 +1,16 @@
 #!/bin/sh
-# Triple-layered DSN resolution
-if [ -n "$DB_HOST" ]; then
-  echo "Source: Individual vars"
-  CORRECTED_URL="postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
-elif [ -n "$NAKAMA_DATABASE_ADDRESS" ]; then
-  echo "Source: NAKAMA_DATABASE_ADDRESS"
-  CORRECTED_URL=$(echo "$NAKAMA_DATABASE_ADDRESS" | sed 's/^postgresql/postgres/')
-else
-  echo "Source: HARDCODED FALLBACK"
-  CORRECTED_URL="postgres://nakama_zvif_user:ADvO78GBduObDM1QQ7s5nhJGHcwXdA7M@dpg-d6vr9gshg0os739ve98g-a/nakama_zvif"
-fi
+# NUCLEAR OPTION: Hardcoded verified URL
+# We use the internal URL provided by the user to guarantee connectivity
+CORRECTED_URL="postgres://nakama_zvif_user:ADvO78GBduObDM1QQ7s5nhJGHcwXdA7M@dpg-d6vr9gshg0os739ve98g-a/nakama_zvif"
 
-echo "database:" > /nakama/data/runtime-config.yml
-echo "  address: \"$CORRECTED_URL\"" >> /nakama/data/runtime-config.yml
-cat /nakama/data/nakama-config.yml >> /nakama/data/runtime-config.yml
+echo "DEBUG: ENV CHECK (NAKAMA_DATABASE_ADDRESS is set: ${NAKAMA_DATABASE_ADDRESS:+yes})"
+echo "USING HARDCODED DSN..."
+
+# Ensure environment variable is also set for server sub-processes
+export NAKAMA_DATABASE_ADDRESS="$CORRECTED_URL"
 
 echo "Running migrations..."
 /nakama/nakama migrate up --database.address "$CORRECTED_URL"
 
 echo "Starting server..."
-exec /nakama/nakama run --config /nakama/data/runtime-config.yml --session.token_expiry_sec 7200
+exec /nakama/nakama run --config /nakama/data/nakama-config.yml --database.address "$CORRECTED_URL" --session.token_expiry_sec 7200
